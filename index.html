@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="player">
+        <div class="dashbroad">
+            <div class="dashbroad_info">
+                <label for="" class="dashbroad_info_label">Now playing</label>
+                <h3 class="dashbroad_info_name" >Thê Lương</h3>
+                <div class="dashbroad_info_cd">
+                    <div class="dashbroad_info_cd_image" style="background-image: url(./asset/img/img1.jpg);"></div>
+                </div>
+            </div>
+            <div class="dashbroad_control">
+                <button class="btn dashbroad_control_repeat">
+                    <i class="fas fa-redo-alt"></i>
+                </button>
+                <button class="btn dashbroad_control_previous">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="btn dashbroad_control_play active">
+                    <i class="fas fa-play-circle"></i>
+                </button>
+                <button class="btn dashbroad_control_pause ">
+                    <i class="fas fa-pause-circle"></i>
+                </button>
+                <button class="btn dashbroad_control_next">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button class="btn dashbroad_control_random">
+                    <i class="fas fa-random"></i>
+                </button>
+            </div>
+            <input id="progress" class="progress" type="range" value="20" step="1" min="0" max="100">
+            <audio id="audio" src=""></audio>
+        </div>
+
+        <div class="playlist">
+            <div class="song">
+                <div class="song_thumbnail">
+                    <div class="song_thumbnail_img" style="background-image: url(./asset/img/img1.jpg);" ></div>
+                </div>
+                <div class="song_content">
+                    <div class="song_content_name">
+                        Bài hát
+                    </div>
+                    <div class="song_content_singer">Ca sĩ</div>
+                </div>
+                <div class="song_option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <script src="./java.js"></script>
+</body>
+</html>
