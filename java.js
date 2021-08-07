@@ -3,70 +3,127 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const $$$ = getComputedStyle.bind();
 
+
+const nameSongUI = $('.dashbroad_info_name');
+const cd = $('.dashbroad_info_cd');
+const cdThumbUI = $('.dashbroad_info_cd_image');
+const audio = $('#audio');
+const playBtn = $('.dashbroad_control_pp');
+const player = $('.player');
+const progress = $('#progress');
+const nextBtn = $('.dashbroad_control_next');
+const prevBtn = $('.dashbroad_control_previous');
+const randomBtn = $('.dashbroad_control_random');
+const repeatBtn = $('.dashbroad_control_repeat');
+const playlist = $('.playlist');
+
+
 const app = {
+    currentIndex: 0,
+    isPlaying: false,
+    isRandom: false,
+    isRepeat: false,
     songs: [
         { 
             name: 'Thê Lương',
             singer: 'Phúc Chinh',
-            path: './asset/music/song1.jpg',
+            path: './asset/music/song1.mp3',
             img: './asset/img/img1.jpg'
         },
         { 
             name: 'Thức Giấc',
             singer: 'Da LAB',
-            path: './asset/music/song2.jpg',
+            path: './asset/music/song2.mp3',
             img: './asset/img/img2.jpg'
         },
         { 
             name: 'Muộn Rồi Mà Sao Còn',
             singer: 'Sơn Tùng M-TP',
-            path: './asset/music/song3.jpg',
+            path: './asset/music/song3.mp3',
             img: './asset/img/img3.jpg'
         },
         { 
             name: 'Sao Còn Đau Lòng Quá',
             singer: 'Hứa Kim Tuyền, Hoàng Duyên',
-            path: './asset/music/song4.jpg',
+            path: './asset/music/song4.mp3',
             img: './asset/img/img4.jpg'
         },
         { 
             name: 'Phận Duyên Lỡ Làng',
             singer: 'Phát Huy T4, Truzg',
-            path: './asset/music/song5.jpg',
+            path: './asset/music/song5.mp3',
             img: './asset/img/img5.jpg'
         },
         { 
             name: 'Trắc Trở',
             singer: 'X2X',
-            path: './asset/music/song6.jpg',
+            path: './asset/music/song6.mp3',
             img: './asset/img/img6.jpg'
         },
         { 
             name: 'Nắm Đôi Bàn Tay',
             singer: 'Kay Trần',
-            path: './asset/music/song7.jpg',
+            path: './asset/music/song7.mp3',
             img: './asset/img/img7.jpg'
         },
         { 
             name: 'Câu Hẹn Câu Thề',
             singer: 'Đình Dũng, ACV',
-            path: './asset/music/song8.jpg',
+            path: './asset/music/song8.mp3',
             img: './asset/img/img8.jpg'
         },
         { 
             name: 'Níu Duyên',
             singer: 'Lê Bảo Bình',
-            path: './asset/music/song9.jpg',
+            path: './asset/music/song9.mp3',
             img: './asset/img/img9.jpg'
         },
         { 
             name: 'Anh Không Tha Thứ',
             singer: 'Đình Dũng, ACV',
-            path: './asset/music/song10.jpg',
+            path: './asset/music/song10.mp3',
             img: './asset/img/img10.jpg'
         },
-        
+        { 
+            name: 'Có Hẹn Với Thanh Xuân',
+            singer: 'MONSTAR',
+            path: './asset/music/song11.mp3',
+            img: './asset/img/img11.jpg'
+        },
+        { 
+            name: 'Sao Ta Ngược Lối',
+            singer: 'Đình Dũng',
+            path: './asset/music/song12.mp3',
+            img: './asset/img/img12.jpg'
+        },
+        { 
+            name: 'Vách Ngọc Ngà',
+            singer: 'Anh Rồng',
+            path: './asset/music/song13.mp3',
+            img: './asset/img/img13.jpg'
+        },
+        { 
+            name: 'Trên Tình Bạn Dưới Tình Yêu',
+            singer: 'MIN',
+            path: './asset/music/song14.mp3',
+            img: './asset/img/img14.jpg'
+        },
+        { 
+            name: 'Chúng Ta Sau Này',
+            singer: 'T.R.I',
+            path: './asset/music/song15.mp3',
+            img: './asset/img/img15.jpg'
+        },
     ],
+
+    /*  true = đang pause
+        flase = đang play */
+    currentPlayPause: function() {
+        result = [player.classList].some(function (array) {
+            return array[1] == 'playing';
+        });
+        return this.isPlaying = result;
+    },
 
     render: function() {
         const htmls = this.songs.map(song => {
@@ -115,12 +172,29 @@ const app = {
         rồi đem so sánh với thẻ co dãn khi cuộn bé hơn thì không cuộc tránh lỗi */
         return heightTotalSong - heightTotalPlayylist;
     },
-    handleEvents: function() {
-        const cd = $('.dashbroad_info_cd');
-        const cdWidth = cd.offsetWidth;
 
+    defineProperties: function() {
+         /* thêm một key là currentSong và có value là phần tử
+        đầu tiên của object this.song this = app*/
+        Object.defineProperty(this, "currentSong", {
+            get: function() {
+                return this.songs[this.currentIndex]
+            }
+        })
+    },
+    handleEvents: function() {
+        const _this = this;
+        const cdWidth = cd.offsetWidth;
         var heightPlaylist = app.minHeightPlaylist(cdWidth);
         
+        /* xử lý cd quay và dừng */
+        const cdThumbUIAnimate = cdThumbUI.animate([
+            { transform: 'rotate(360deg)'}
+        ],{
+            duration: 10000,
+            iterations: Infinity
+        })
+        cdThumbUIAnimate.pause()
         /* chay lại hàm minHeightPlaylist mỗi khi body thay đổi size
         để cập nhật lại heightPlaylist*/
         $$('body')[0].onresize = function abc() {
@@ -128,6 +202,7 @@ const app = {
             heightPlaylist = app.minHeightPlaylist(cdWidthload)
         };
         
+        /* xử lý phóng to thu nhỏ cd khi scroll playlist */
         $('.playlist').onscroll = function (e) {
             // console.log(heightPlaylist);
             /* heightPlaylist phải lớn hơn cdWidth để tránh lỗi giật giật
@@ -137,13 +212,145 @@ const app = {
                 const scrollPlaylist = e.srcElement.scrollTop;
                 const newCdWidth = cdWidth - scrollPlaylist ;
                 cd.style.width = newCdWidth > 0 ? newCdWidth + 'px': 0;
+
+                cd.style.opacity = newCdWidth / cdWidth;
+            }
+        }
+
+        /* xử lý khi nhấn play */
+        playBtn.onclick = function () {
+            _this.currentPlayPause()
+            if (!_this.isPlaying) {
+                audio.play();
+            }else{
+                audio.pause();
+            }
+        }
+
+        /* khi bài hát được play */
+        audio.onplay = function () {
+            player.classList.add('playing')
+            cdThumbUIAnimate.play()
+        }
+        /* khi bài hát được pause */
+        audio.onpause = function () {
+            player.classList.remove('playing')
+            cdThumbUIAnimate.pause()
+        }
+        /* phi bài hát đang được phát */
+        audio.ontimeupdate = function () {
+            if (this.duration) {
+                progress.value = Math.floor(this.currentTime * 100 / this.duration)
+            }
+        }
+        /* khi progress bị thay đổi thì sẽ làm gì*/
+        progress.oninput = function (e) {
+            currentPerson = e.target.value;
+            audio.currentTime = currentPerson * audio.duration / 100;
+        }
+        /* khi next */
+        nextBtn.onclick = function () {
+            if (_this.isRandom) {
+                _this.playRandomSong();
+            }else {
+                _this.nextSong();
+            }
+            audio.play(); 
+            
+        }
+        /* khi previous */
+        prevBtn.onclick = function () {
+            if (_this.isRandom) {
+                _this.playRandomSong();
+            }else {
+                _this.previousSong();
+            }
+            audio.play(); 
+        }
+
+        /* xử lý khi random */
+        randomBtn.onclick = function () {
+            _this.isRandom = !_this.isRandom
+            randomBtn.classList.toggle('active',_this.isRandom);
+        }
+        /* xử lý phát lại tuần tự các bài hát */
+        repeatBtn.onclick = function () {
+            _this.isRepeat = !_this.isRepeat
+            repeatBtn.classList.toggle('active',_this.isRepeat);
+            
+        }
+        /* xử lý khi hết bài hát */
+        audio.onended = function () {
+            if (_this.isRepeat) {
+                audio.play();
+                return;
+            }
+            if (_this.isRandom) {
+                _this.playRandomSong();
+                audio.play();
             }
         }
     },
 
+    loadCurrenSong: function () {
+        nameSongUI.textContent = this.currentSong.name;
+        cdThumbUI.style.backgroundImage = `url(${this.currentSong.img})`;
+        audio.src = this.currentSong.path;
+        
+        // console.log(nameSongUI);
+        // console.log(cdThumbUI );
+        // console.log(audio );
+    },
+    nextSong: function () {
+        this.currentIndex++
+        if (this.currentIndex >= this.songs.length) {
+            this.currentIndex = 0;
+        }
+        this.loadCurrenSong()
+        // console.log(playlist.children[this.currentIndex]);
+        this.activeSong(this.currentIndex);
+    },
+    previousSong: function () {
+        this.currentIndex--
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.songs.length -1
+        }
+        this.loadCurrenSong()
+        this.activeSong(this.currentIndex);
+    },
+    playRandomSong: function () {
+        let newIndex
+        do {
+            newIndex = Math.floor(Math.random() * this.songs.length)
+        }while(newIndex === this.currentIndex)
+        this.currentIndex = newIndex;
+        this.loadCurrenSong()
+        this.activeSong(this.currentIndex);
+    },
+    
+    activeSong: function (index = 0) {
+        var length = this.songs.length;
+        for (var i = 0; i < length; ++i) {
+            playlist.children[i].classList.remove('active');
+        }
+        var song = playlist.children[index]
+        song.classList.add('active');
+    },
+    
     start: function() {
-        this.render();
+        /* định nghĩa các thuộc tính cho Object app */
+        this.defineProperties();
+
+        /* lắng nghe và sự lý các sự kiện */
         this.handleEvents();
+
+        /* tải bài hát đầu tiên vào UI khi chạy ứng dụng */
+        this.loadCurrenSong()
+        
+        /* render danh sách bài hát */
+        this.render();
+
+        this.activeSong();
     }
 }
 
