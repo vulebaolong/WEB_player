@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;900&display=swap');
 :root {
-  --primary-color: #ec1f55;
-  --text-color: #333;
+    --primary-color: #ec1f55;
+    --text-color: #333;
 }
+
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 html {
@@ -17,27 +18,26 @@ html {
 body {
     display: flex;
 }
+
 .player {
     width: 480px;
-    margin:  auto ;
+    margin: auto;
     box-shadow: rgba(34, 34, 56, 0.2) 0px 7px 29px 0px;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.dashbroad{
+.dashbroad {
     padding: 20px;
     border: 1px solid rgb(240, 240, 240);
     background-color: white;
-    
     z-index: 1;
 }
 
-.dashbroad_info{
+.dashbroad_info {
     display: block;
     text-align: center;
-    
 }
 
 .dashbroad_info_label {
@@ -51,10 +51,11 @@ body {
 }
 
 .dashbroad_info_cd {
-    width:200px;
+    width: 200px;
     margin: 20px auto;
 }
-.dashbroad_info_cd_image {    
+
+.dashbroad_info_cd_image {
     padding-top: 100%;
     border-radius: 50%;
     background-position: center;
@@ -64,7 +65,7 @@ body {
 
 .dashbroad_control {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 20px;
     margin-top: 30px;
 }
@@ -75,9 +76,23 @@ body {
     border: none;
     background-color: white;
     cursor: pointer;
+    outline: none;
+    width: 60px;
+    -webkit-user-select: none;
+    /* Chrome all / Safari all */
+    -moz-user-select: none;
+    /* Firefox all */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+    /* Likely future */
 }
 
-.player.playing .icon_play{
+.btn:active {
+    opacity: 0.7;
+}
+
+.player.playing .icon_play {
     display: none;
 }
 
@@ -86,7 +101,7 @@ body {
 }
 
 .dashbroad_control_pp {
-    font-size:60px;
+    font-size: 60px;
     display: flex;
     align-items: center;
 }
@@ -94,7 +109,6 @@ body {
 .icon_pause {
     display: none;
 }
-
 
 .dashbroad_control_repeat.active,
 .dashbroad_control_random.active {
@@ -122,12 +136,11 @@ body {
 
 .progress:hover::-webkit-slider-thumb {
     background: #c70b3d;
-   
     /* box-shadow: -500px 0 0 500px var(--primary-color); */
-  }
+}
+
 .progress::-webkit-slider-thumb {
     -webkit-appearance: none;
-    
     width: 6px;
     height: 6px;
     background: #d46e89;
@@ -142,12 +155,17 @@ body {
 
 .playlist::-webkit-scrollbar {
     display: none;
-  }
-  /* Hide scrollbar for IE, Edge and Firefox */
+}
+
+
+/* Hide scrollbar for IE, Edge and Firefox */
+
 .playlist {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
 
 .song {
     background-color: white;
@@ -161,15 +179,17 @@ body {
     cursor: pointer;
 }
 
+.song:active {
+    opacity: 0.7;
+}
+
 .song:last-child {
     margin-bottom: 0;
 }
 
-
-
 .song_thumbnail {
-    width:45px;
-    height:45px;
+    width: 45px;
+    height: 45px;
     flex-shrink: 0;
 }
 
@@ -180,19 +200,18 @@ body {
     background-size: cover;
     border-radius: 50%;
 }
+
 .song_content {
     margin: 0 30px;
     flex: 1;
-    
     width: 200px;
 }
+
 .song_content_name {
-    font-size:20px;
+    font-size: 20px;
     font-weight: 700;
     display: block;
-
     word-break: break-word;
-    
     --line-height: 1.8rem;
     --limit-line: 1;
     line-height: var(--line-height);
@@ -202,13 +221,11 @@ body {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--limit-line);
 }
-
 
 .song_content_singer {
     font-size: 14px;
     color: rgb(179, 179, 179);
     word-break: break-word;
-    
     --line-height: 1.8rem;
     --limit-line: 1;
     line-height: var(--line-height);
@@ -218,13 +235,15 @@ body {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: var(--limit-line);
 }
+
 .song_option {
     display: flex;
     align-items: center;
     font-size: 20px;
 }
+
 .song.active,
-.song.active .song_content_singer{
+.song.active .song_content_singer {
     background-color: var(--primary-color);
     color: white;
 }
