@@ -34,10 +34,31 @@
         padding: 10px;
     }
     body::before {
-        clip-path: circle(24% at 86% 89%);
+        --width: 238px;
+        content: "";
+        position: absolute;
+        top: 401px;
+        left: 146px;
+        width: var(--width);
+        height: var(--width);
+        background: linear-gradient(217deg,rgb(255, 0, 0),rgb(255, 0, 255));
+        clip-path: none;
+        border-radius: 50%;
+        filter: blur(5px);
     }
     
     body::after {
-        clip-path: circle(12% at 9% 4%);
+        --width: 120px;
+        content: "";
+        position: absolute;
+        top: -26px;
+        left: -22px;
+        width: var(--width);
+        height: var(--width);
+        background: linear-gradient(217deg,rgb(233, 30, 99),rgb(33, 150, 243) 55%);
+        clip-path: none;
+        border-radius: 50%;
+        filter: blur(5px);
     }
+    
 }
