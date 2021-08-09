@@ -157,6 +157,7 @@ body::after {
     font-size: 60px;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 
 .icon_pause {
