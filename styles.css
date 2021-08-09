@@ -24,10 +24,10 @@ body {
     /* width: 700px;
     position: relative;
     margin: 0 auto; */
+    overflow: hidden;
 }
 
-body::before {
-    content: "";
+.circle1 {
     position: absolute;
     top: 0;
     left: 0;
@@ -37,7 +37,7 @@ body::before {
     clip-path: circle(22% at 67% 81%);
 }
 
-body::after {
+.circle2 {
     content: "";
     position: absolute;
     top: 0;
