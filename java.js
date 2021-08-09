@@ -153,9 +153,9 @@ const app = {
 
     minHeightPlaylist: function(cdWidth) {
         /* lấy tổng chiều cao của tất cả Song */
-        var heightTotalSong = song.offsetHeight;
-        heightTotalSong += parseInt($$$(song).marginTop);
-        heightTotalSong += parseInt($$$(song).marginBottom);
+        var heightTotalSong = $('.song').offsetHeight ;
+        heightTotalSong += parseInt($$$($('.song')).marginTop);
+        heightTotalSong += parseInt($$$($('.song')).marginBottom);
         heightTotalSong *= this.songs.length;
 
         /* lấy tổng chiều cao của playlist */
@@ -166,6 +166,7 @@ const app = {
          thì playlis sẽ bị kéo dài ra */
         heightTotalPlayylist += cdWidth;
 
+        // console.log(heightTotalPlayylist)
         /* tổng height tất cả song trừ đi height của playlist
         rồi đem so sánh với thẻ co dãn khi cuộn bé hơn thì không cuộc tránh lỗi */
         return heightTotalSong - heightTotalPlayylist;
@@ -197,7 +198,7 @@ const app = {
             để cập nhật lại heightPlaylist*/
         $$('body')[0].onresize = function abc() {
             cdWidthload = cd.offsetWidth;
-            heightPlaylist = app.minHeightPlaylist(cdWidthload)
+            heightPlaylist = _this.minHeightPlaylist(cdWidthload)
         };
 
         /* xử lý phóng to thu nhỏ cd khi scroll playlist */

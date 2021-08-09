@@ -1,0 +1,43 @@
+
+/* Mobile and tablet width < 1024px */
+@media only screen and (max-width: 63.9375em) {
+    
+}
+/* Tablet and PC width >= 740px */
+@media only screen and (min-width: 46.25em) {
+   
+}
+
+/* Tablet: width >= 740px and width < 1024px */
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .player{
+        margin: 5% auto ;
+    }
+}
+
+/* PC width >= 1024px */
+@media only screen and (min-width: 1024px) {
+   
+}
+
+/* Mobile: width < 739px */
+@media only screen and (max-width: 46.1875em) {
+    .player{
+        margin: 0 auto ;
+        height: 100vh;
+        padding-bottom: 10px
+    }
+    .dashbroad_control {
+        margin: 0 0 10px 0;
+    }
+    .playlist{
+        padding: 10px;
+    }
+    body::before {
+        clip-path: circle(24% at 86% 89%);
+    }
+    
+    body::after {
+        clip-path: circle(12% at 9% 4%);
+    }
+}
