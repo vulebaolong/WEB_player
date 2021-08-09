@@ -347,11 +347,19 @@ const app = {
 
         audio.onwaiting  = function() {
             console.log("Downloading video");
-            dashLabel.innerHTML = "Đợi tí đang load nhạc nha Phi Phi"
+            dashLabel.innerHTML = `
+            <i class="fas fa-heart"></i>
+            Đợi tí đang load nhạc nha Phi Phi
+            <i class="fas fa-heart"></i>
+            `
         };
         audio.oncanplaythrough = function() {
             console.log("xong");
-            dashLabel.innerHTML = "Playing"
+            dashLabel.innerHTML = `
+            <i class="fas fa-heart"></i>
+            Yêu Phi Phi nhất
+            <i class="fas fa-heart"></i>
+            `
         };
 
 
