@@ -14,6 +14,7 @@ const nextBtn = $('.dashbroad_control_next');
 const prevBtn = $('.dashbroad_control_previous');
 const randomBtn = $('.dashbroad_control_random');
 const repeatBtn = $('.dashbroad_control_repeat');
+const dashLabel = $('.dashbroad_info_label');
 const playlist = $('.playlist');
 const song = $('.song');
 
@@ -228,6 +229,10 @@ const app = {
         audio.onplay = function() {
             player.classList.add('playing')
             cdThumbUIAnimate.play()
+            console.log(audio.volume)
+            _this.volumeUp(0,0.05,25);
+
+            dashLabel.innerHTML = "Playing"
         }
 
         /* khi bài hát được pause */
@@ -248,6 +253,9 @@ const app = {
             currentPerson = e.target.value;
             audio.currentTime = currentPerson * audio.duration / 100;
         }
+
+        /* khi nhạc gần hết */
+        
 
         /* khi next */
         nextBtn.onclick = function() {
@@ -317,6 +325,7 @@ const app = {
             audio.play();
             _this.scrollToActiveSong()
         }
+
         playlist.onclick = function(e) {
             var clickSong = e.target.closest('.song:not(.active)');
             var clicksongOption = e.target.closest('.song_option');
@@ -335,6 +344,16 @@ const app = {
             }
 
         }
+
+        audio.onwaiting  = function() {
+            console.log("Downloading video");
+            dashLabel.innerHTML = "Đợi tí đang load nhạc nha Phi Phi"
+        };
+        audio.oncanplaythrough = function() {
+            console.log("xong");
+            dashLabel.innerHTML = "Playing"
+        };
+
 
     },
 
@@ -389,6 +408,22 @@ const app = {
         }, 100)
     },
 
+    volumeUp: function (starVolume,step = 0.01,speed = 50) {
+        audio.volume = starVolume
+        for (let i = 0; i <= 1; i+=step){ 
+            setTimeout(function () {  
+                if (audio.volume < 0.9) {
+                    audio.volume += step 
+                }else {
+                    audio.volume = 1;
+                }
+                console.log(audio.volume)
+            }, i*speed*100)
+        }
+    },
+
+    
+
     start: function() {
         /* định nghĩa các thuộc tính cho Object app */
         this.defineProperties();
@@ -403,6 +438,8 @@ const app = {
         this.render();
 
         this.activeSong();
+
+        
     }
 }
 

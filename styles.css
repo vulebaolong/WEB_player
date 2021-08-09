@@ -21,9 +21,9 @@ body {
 
 .player {
     width: 480px;
-    margin: auto;
+    margin: 1% auto ;
     box-shadow: rgba(34, 34, 56, 0.2) 0px 7px 29px 0px;
-    height: 100vh;
+    height: 94vh;
     display: flex;
     flex-direction: column;
 }
