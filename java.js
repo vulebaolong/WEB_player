@@ -210,8 +210,13 @@ const app = {
             if (heightPlaylist > cdWidth) {
                 const scrollPlaylist = e.srcElement.scrollTop;
                 const newCdWidth = cdWidth - scrollPlaylist;
-                cd.style.width = newCdWidth > 0 ? newCdWidth + 'px' : 0;
-
+                if (newCdWidth > 0) {
+                    cd.style.width = newCdWidth + 'px'
+                    cd.style.marginBottom = "20px";
+                }else {
+                    cd.style.width =0;
+                    cd.style.marginBottom = "0";
+                }
                 cd.style.opacity = newCdWidth / cdWidth;
             }
         }

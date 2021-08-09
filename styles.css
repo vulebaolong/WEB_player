@@ -98,6 +98,8 @@ body::after {
     width: 200px;
     border-radius: 50%;
     overflow: hidden;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .dashbroad_info_cd_image {
@@ -106,8 +108,8 @@ body::after {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin-bottom: 20px;
-    margin-top: 10px;
+    /* margin-bottom: 20px;
+    margin-top: 10px; */
 }
 
 .dashbroad_control {
