@@ -235,7 +235,6 @@ const app = {
         audio.onplay = function() {
             player.classList.add('playing')
             cdThumbUIAnimate.play()
-            console.log(audio.volume)
             _this.volumeUp(0,0.05,25);
 
             dashLabel.innerHTML = "Playing"
@@ -352,7 +351,6 @@ const app = {
         }
 
         audio.onwaiting  = function() {
-            console.log("Downloading video");
             dashLabel.innerHTML = `
             <i class="fas fa-heart"></i>
             Đợi tí đang load nhạc nha Phi Phi
@@ -360,7 +358,6 @@ const app = {
             `
         };
         audio.oncanplaythrough = function() {
-            console.log("xong");
             dashLabel.innerHTML = `
             <i class="fas fa-heart"></i>
             Yêu Phi Phi nhất
@@ -431,7 +428,6 @@ const app = {
                 }else {
                     audio.volume = 1;
                 }
-                console.log(audio.volume)
             }, i*speed*100)
         }
     },
@@ -456,6 +452,38 @@ const app = {
         
     }
 }
-
+function Effect() {
+    var widthBody = $$('body')[0].offsetWidth;
+    if (widthBody >= 1024) {
+        VanillaTilt.init(document.querySelectorAll(".btn"), {
+            reverse:                false,  // reverse the tilt direction
+            max:                    35,     // max tilt rotation (degrees)
+            startX:                 0,      // the starting tilt on the X axis, in degrees.
+            startY:                 0,      // the starting tilt on the Y axis, in degrees.
+            perspective:            1000,   // Transform perspective, the lower the more extreme the tilt gets.
+            scale:                  1,      // 2 = 200%, 1.5 = 150%, etc..
+            speed:                  300,    // Speed of the enter/exit transition
+            transition:             true,   // Set a transition on enter/exit.
+            axis:                   null,   // What axis should be disabled. Can be X or Y.
+            reset:                  true,    // If the tilt effect has to be reset on exit.
+            easing:                 "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
+            glare:                  true,   // if it should have a "glare" effect
+            "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
+            "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
+                                            // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+            "mouse-event-element":  null, 
+        });
+        VanillaTilt.init(document.querySelector(".dashbroad_info_cd"), {
+            reverse:                false,  // reverse the tilt direction
+            max:                    35,     // max tilt rotation (degrees)
+            glare:                  true,   // if it should have a "glare" effect
+            "max-glare":            1,      // the maximum "glare" opacity (1 = 100%, 0.5 = 50%)
+            "glare-prerender":      false,  // false = VanillaTilt creates the glare elements for you, otherwise
+                                            // you need to add .js-tilt-glare>.js-tilt-glare-inner by yourself
+            "mouse-event-element":  null, 
+        });
+    }
+}
 
 app.start()
+Effect()
