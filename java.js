@@ -353,14 +353,14 @@ const app = {
         audio.onwaiting  = function() {
             dashLabel.innerHTML = `
             <i class="fas fa-heart"></i>
-            Đợi tí đang load nhạc nha Phi Phi
+                Music Loading
             <i class="fas fa-heart"></i>
             `
         };
         audio.oncanplaythrough = function() {
             dashLabel.innerHTML = `
             <i class="fas fa-heart"></i>
-            Yêu Phi Phi nhất
+            Playing...
             <i class="fas fa-heart"></i>
             `
         };
