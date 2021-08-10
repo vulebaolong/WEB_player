@@ -17,6 +17,8 @@ const repeatBtn = $('.dashbroad_control_repeat');
 const dashLabel = $('.dashbroad_info_label');
 const playlist = $('.playlist');
 const song = $('.song');
+const timeRight = $('.time_right');
+const time_left = $('.time_left');
 
 
 const app = {
@@ -231,19 +233,23 @@ const app = {
             }
         }
 
-        /* khi bài hát được play */
+        var Itv_timeLeft;
+        /* khi bài hát đang được play */
         audio.onplay = function() {
             player.classList.add('playing')
             cdThumbUIAnimate.play()
             _this.volumeUp(0,0.05,25);
 
             dashLabel.innerHTML = "Playing"
+            Itv_timeLeft = setInterval(_this.formatTimeCurrent, 1000)
+            
         }
 
         /* khi bài hát được pause */
         audio.onpause = function() {
             player.classList.remove('playing')
             cdThumbUIAnimate.pause()
+            clearInterval(Itv_timeLeft);
         }
 
         /* phi bài hát đang được phát */
@@ -251,12 +257,15 @@ const app = {
             if (this.duration) {
                 progress.value = Math.floor(this.currentTime * 100 / this.duration)
             }
+            
+            
+            // console.log(_this.format_time(this.currentTime),_this.format_time(this.duration))
         }
 
         /* khi progress bị thay đổi thì sẽ làm gì*/
         progress.oninput = function(e) {
             currentPerson = e.target.value;
-            audio.currentTime = currentPerson * audio.duration / 100;
+            audio.currentTime = currentPerson * audio.duration / 100;           
         }
 
         /* khi nhạc gần hết */
@@ -356,13 +365,19 @@ const app = {
                 Music Loading
             <i class="fas fa-heart"></i>
             `
+            console.log('waiting')
         };
+
+
         audio.oncanplaythrough = function() {
             dashLabel.innerHTML = `
             <i class="fas fa-heart"></i>
             Playing...
             <i class="fas fa-heart"></i>
             `
+            time = _this.formatTimeDuration();
+            timeRight.innerHTML = time
+            console.log('Playing...')
         };
 
 
@@ -432,6 +447,31 @@ const app = {
         }
     },
 
+    formatTimeCurrent: function (){
+        time = audio.currentTime
+        sec = Math.floor( time );
+        min = Math.floor( sec / 60 );
+        min = min >= 10 ? min : '0' + min;
+        sec = Math.floor( sec % 60 );
+        sec = sec >= 10 ? sec : '0' + sec;
+        console.log(min + ":"+ sec)
+        time_left.innerHTML = `${min}:${sec}`
+        // return min + ":"+ sec;
+    },
+    formatTimeDuration: function (){
+    time = audio.duration
+    sec = Math.floor( time );
+    min = Math.floor( sec / 60 );
+    min = min >= 10 ? min : '0' + min;
+    sec = Math.floor( sec % 60 );
+    sec = sec >= 10 ? sec : '0' + sec;
+    // console.log(min + ":"+ sec)
+    return min + ":"+ sec;
+    },
+
+    console: function (num){
+        console.log(num)
+    },
     
 
     start: function() {

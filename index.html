@@ -47,8 +47,12 @@
                     <i class="fas fa-random"></i>
                 </button>
             </div>
-            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
-            <audio id="audio" src=""  preload="none"></audio>
+            <div class="progress_wrap">
+                <span class="time_left">00:00</span>
+                <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+                <span class="time_right">00:00</span>
+            </div>
+            <audio id="audio" src=""  preload="none" ontimeupdate="updateTrackTime(this)"></audio>
         </div>
         
         <div class="playlist">

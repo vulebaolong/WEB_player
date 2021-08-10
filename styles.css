@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;900&display=swap');
 :root {
     --primary-color: #ec1f55;
-    --text-color: #333;
+    --text-color: rgb(138, 138, 138);
 }
 
 * {
@@ -122,7 +122,6 @@ body {
 
 .btn {
     font-size: 20px;
-    color: var(--primary-color);
     border: none;
     /* background-color: white; */
     background-color:transparent;
@@ -155,6 +154,7 @@ body {
 }
 
 .dashbroad_control_pp {
+    color: var(--primary-color);
     font-size: 60px;
     display: flex;
     align-items: center;
@@ -174,10 +174,22 @@ body {
 .dashbroad_control_next,
 .dashbroad_control_repeat,
 .dashbroad_control_random {
-    color: rgb(138, 138, 138);
+    color: var(--text-color);
+}
+
+.progress_wrap {
+    display: flex;
+    align-items: center;
+
+    margin: 0 -5px;
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: center;
 }
 
 .progress {
+    /* flex-shrink: 0; */
     -webkit-appearance: none;
     outline: none;
     width: 100%;
@@ -203,7 +215,22 @@ body {
     /* border-radius: 50%; */
 }
 
+.time_left {
+    color: var(--text-color);
+    margin-right: 10px;
+    text-align: right;
+}
+.time_right {
+    color: white;
+    margin-left: 10px;
+}
 
+.time_left,
+.time_right{
+    font-size: 15px;
+    font-weight: 300;
+    min-width: 45px;
+}
 
 .playlist {
     padding: 20px 20px 0 20px;
